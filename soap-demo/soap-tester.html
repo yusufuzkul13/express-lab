@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SOAP API Tester</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h2 {
+            color: #1a73e8;
+            margin-top: 0;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #1557b0;
+        }
+
+        #result-container {
+            margin-top: 25px;
+            display: none;
+        }
+
+        h3 {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        #result {
+            background: #f8f9fa;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #333;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>SOAP Calculator</h2>
+        <p style="color: #666; font-size: 14px;">Aşağıdaki sayıları toplayarak SOAP servisimizi test et.</p>
+
+        <div class="input-group">
+            <label for="intA">Sayı 1:</label>
+            <input type="number" id="intA" value="15">
+        </div>
+
+        <div class="input-group">
+            <label for="intB">Sayı 2:</label>
+            <input type="number" id="intB" value="25">
+        </div>
+
+        <button id="sendBtn">Topla (SOAP Request Gönder)</button>
+
+        <div id="result-container">
+            <h3>Sunucudan Gelen XML Yanıtı:</h3>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('sendBtn').addEventListener('click', async () => {
+            const n1 = document.getElementById('intA').value;
+            const n2 = document.getElementById('intB').value;
+            const resultDiv = document.getElementById('result');
+            const resultContainer = document.getElementById('result-container');
+
+            // DİKKAT: Tarayıcıda 'soap' kütüphanesi çalışmaz. 
+            // Bu yüzden XML'i kendimiz string olarak oluşturup POST ile gönderiyoruz.
+            const soapEnvelope = `
+                <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://www.examples.com/wsdl/CalculatorService.wsdl">
+                   <soapenv:Header/>
+                   <soapenv:Body>
+                      <wsdl:Add>
+                         <intA>${n1}</intA>
+                         <intB>${n2}</intB>
+                      </wsdl:Add>
+                   </soapenv:Body>
+                </soapenv:Envelope>`.trim();
+
+            resultContainer.style.display = 'block';
+            resultDiv.innerText = "İstek gönderiliyor...";
+
+            try {
+                const response = await fetch('http://localhost:8001/calculator', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/xml',
+                        'SOAPAction': 'Add'
+                    },
+                    body: soapEnvelope
+                });
+
+                const text = await response.text();
+                resultDiv.innerText = text;
+
+            } catch (err) {
+                resultDiv.innerText = "Hata: Sunucu çalışmıyor olabilir veya CORS engeline takılıyor olabilir.\n" + err.message;
+            }
+        });
+    </script>
+</body>
+
+</html>

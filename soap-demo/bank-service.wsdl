@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="BankService"
+             targetNamespace="http://www.antigravity-bank.com/wsdl/BankService.wsdl"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://www.antigravity-bank.com/wsdl/BankService.wsdl"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Veri Tipleri Tanımları -->
+    <types>
+        <xsd:schema targetNamespace="http://www.antigravity-bank.com/wsdl/BankService.wsdl">
+            <!-- Hesap Bilgisi Objesi -->
+            <xsd:complexType name="AccountInfo">
+                <xsd:sequence>
+                    <xsd:element name="iban" type="xsd:string"/>
+                    <xsd:element name="owner" type="xsd:string"/>
+                    <xsd:element name="balance" type="xsd:decimal"/>
+                    <xsd:element name="currency" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <!-- Güvenlik Başlığı Objesi -->
+            <xsd:element name="SecurityHeader">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="AuthToken" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <!-- Mesajlar -->
+    <message name="GetAccountRequest">
+        <part name="accountNumber" type="xsd:string"/>
+    </message>
+
+    <message name="GetAccountResponse">
+        <part name="accountDetails" type="tns:AccountInfo"/>
+    </message>
+
+    <message name="SecurityHeaderMessage">
+        <part name="header" element="tns:SecurityHeader"/>
+    </message>
+
+    <!-- Port Tanımları (Fonksiyonlar) -->
+    <portType name="BankPortType">
+        <operation name="GetAccountDetails">
+            <input message="tns:GetAccountRequest"/>
+            <output message="tns:GetAccountResponse"/>
+        </operation>
+    </portType>
+
+    <!-- Binding (Protocol ve Header Ayarları) -->
+    <binding name="BankBinding" type="tns:BankPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="GetAccountDetails">
+            <soap:operation soapAction="GetAccountDetails"/>
+            <input>
+                <soap:header message="tns:SecurityHeaderMessage" part="header" use="literal"/>
+                <soap:body use="literal" namespace="http://www.antigravity-bank.com/wsdl/BankService.wsdl"/>
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://www.antigravity-bank.com/wsdl/BankService.wsdl"/>
+            </output>
+        </operation>
+    </binding>
+
+    <!-- Service (Ulaşım Adresi) -->
+    <service name="BankService">
+        <port name="BankPort" binding="tns:BankBinding">
+            <soap:address location="http://localhost:8001/bank"/>
+        </port>
+    </service>
+</definitions>

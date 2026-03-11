@@ -1,0 +1,254 @@
+[
+  {
+    "id": 1,
+    "name": "Laptop Pro 15",
+    "price": 32500,
+    "category": "electronics",
+    "stock": 12
+  },
+  {
+    "id": 2,
+    "name": "Laptop Air 13",
+    "price": 24500,
+    "category": "electronics",
+    "stock": 8
+  },
+  {
+    "id": 3,
+    "name": "Kablosuz Mouse",
+    "price": 650,
+    "category": "electronics",
+    "stock": 40
+  },
+  {
+    "id": 4,
+    "name": "Mekanik Klavye",
+    "price": 2200,
+    "category": "electronics",
+    "stock": 15
+  },
+  {
+    "id": 5,
+    "name": "27 İnç Monitör",
+    "price": 7800,
+    "category": "electronics",
+    "stock": 10
+  },
+  {
+    "id": 6,
+    "name": "Bluetooth Kulaklık",
+    "price": 1800,
+    "category": "electronics",
+    "stock": 25
+  },
+  {
+    "id": 7,
+    "name": "Akıllı Saat",
+    "price": 5400,
+    "category": "electronics",
+    "stock": 18
+  },
+  {
+    "id": 8,
+    "name": "Telefon Standı",
+    "price": 180,
+    "category": "accessories",
+    "stock": 100
+  },
+  {
+    "id": 9,
+    "name": "USB-C Kablo",
+    "price": 220,
+    "category": "accessories",
+    "stock": 150
+  },
+  {
+    "id": 10,
+    "name": "Powerbank 20000mAh",
+    "price": 1200,
+    "category": "electronics",
+    "stock": 30
+  },
+  {
+    "id": 11,
+    "name": "Defter A4",
+    "price": 90,
+    "category": "stationery",
+    "stock": 200
+  },
+  {
+    "id": 12,
+    "name": "Tükenmez Kalem",
+    "price": 25,
+    "category": "stationery",
+    "stock": 500
+  },
+  {
+    "id": 13,
+    "name": "Ajanda 2026",
+    "price": 240,
+    "category": "stationery",
+    "stock": 75
+  },
+  {
+    "id": 14,
+    "name": "Dosya Klasörü",
+    "price": 60,
+    "category": "stationery",
+    "stock": 120
+  },
+  {
+    "id": 15,
+    "name": "Masa Lambası",
+    "price": 950,
+    "category": "home",
+    "stock": 22
+  },
+  {
+    "id": 16,
+    "name": "Ofis Koltuğu",
+    "price": 6900,
+    "category": "home",
+    "stock": 6
+  },
+  {
+    "id": 17,
+    "name": "Çalışma Masası",
+    "price": 8500,
+    "category": "home",
+    "stock": 4
+  },
+  {
+    "id": 18,
+    "name": "Kitaplık",
+    "price": 4200,
+    "category": "home",
+    "stock": 7
+  },
+  {
+    "id": 19,
+    "name": "Kahve Makinesi",
+    "price": 5600,
+    "category": "kitchen",
+    "stock": 9
+  },
+  {
+    "id": 20,
+    "name": "Elektrikli Kettle",
+    "price": 1100,
+    "category": "kitchen",
+    "stock": 20
+  },
+  {
+    "id": 21,
+    "name": "Tava Seti",
+    "price": 2400,
+    "category": "kitchen",
+    "stock": 14
+  },
+  {
+    "id": 22,
+    "name": "Bıçak Seti",
+    "price": 1750,
+    "category": "kitchen",
+    "stock": 18
+  },
+  {
+    "id": 23,
+    "name": "Termos",
+    "price": 900,
+    "category": "kitchen",
+    "stock": 35
+  },
+  {
+    "id": 24,
+    "name": "Sırt Çantası",
+    "price": 2100,
+    "category": "fashion",
+    "stock": 27
+  },
+  {
+    "id": 25,
+    "name": "Spor Ayakkabı",
+    "price": 3900,
+    "category": "fashion",
+    "stock": 16
+  },
+  {
+    "id": 26,
+    "name": "Kot Pantolon",
+    "price": 1800,
+    "category": "fashion",
+    "stock": 32
+  },
+  {
+    "id": 27,
+    "name": "Tişört",
+    "price": 450,
+    "category": "fashion",
+    "stock": 90
+  },
+  {
+    "id": 28,
+    "name": "Mont",
+    "price": 7200,
+    "category": "fashion",
+    "stock": 11
+  },
+  {
+    "id": 29,
+    "name": "Şapka",
+    "price": 320,
+    "category": "fashion",
+    "stock": 60
+  },
+  {
+    "id": 30,
+    "name": "Güneş Gözlüğü",
+    "price": 1500,
+    "category": "fashion",
+    "stock": 23
+  },
+  {
+    "id": 31,
+    "name": "Roman Kitap",
+    "price": 280,
+    "category": "books",
+    "stock": 120
+  },
+  {
+    "id": 32,
+    "name": "Yazılım Kitabı",
+    "price": 850,
+    "category": "books",
+    "stock": 40
+  },
+  {
+    "id": 33,
+    "name": "Tarih Kitabı",
+    "price": 520,
+    "category": "books",
+    "stock": 55
+  },
+  {
+    "id": 34,
+    "name": "Çocuk Kitabı",
+    "price": 190,
+    "category": "books",
+    "stock": 70
+  },
+  {
+    "id": 35,
+    "name": "Ansiklopedi",
+    "price": 2400,
+    "category": "books",
+    "stock": 8
+  },
+  {
+    "id": 36,
+    "name": "Test urun 6",
+    "price": null,
+    "category": "electronics",
+    "stock": 145
+  }
+]

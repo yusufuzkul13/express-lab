@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Corporate Bank SOAP Tester</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            padding: 40px;
+            background-color: #eef2f7;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .header {
+            border-bottom: 2px solid #1a73e8;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        h1 {
+            color: #1a73e8;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .security-input {
+            background-color: #fff9db;
+            border-color: #fab005;
+        }
+
+        button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #response {
+            margin-top: 20px;
+            padding: 15px;
+            background: #2d3436;
+            color: #00ff00;
+            border-radius: 6px;
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            min-height: 100px;
+            white-space: pre-wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .badge-secure {
+            background: #d3f9d8;
+            color: #2b8a3e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="badge badge-secure">Encrypted & Stricly Typed</span>
+            <h1>Antigravity Central Bank</h1>
+        </div>
+
+        <div class="field">
+            <label>Security Token (REQUIRED):</label>
+            <input type="text" id="token" class="security-input" value="ANTIGRAVITY-SECURE-TOKEN-123">
+        </div>
+
+        <div class="field">
+            <label>Account Number (IBAN Query):</label>
+            <input type="text" id="accNum" value="ACC-998877">
+        </div>
+
+        <button onclick="fetchAccount()">Sorgula (Secure SOAP Call)</button>
+
+        <div id="response">Yanıt bekleniyor...</div>
+    </div>
+
+    <script>
+        async function fetchAccount() {
+            const token = document.getElementById('token').value;
+            const acc = document.getElementById('accNum').value;
+            const resDiv = document.getElementById('response');
+
+            // --- KURUMSAL SOAP ZARFI ---
+            // Dikkat: Header ve Body kısımları ayrılmıştır.
+            const soapRequest = `
+                <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ban="http://www.antigravity-bank.com/wsdl/BankService.wsdl">
+                   <soapenv:Header>
+                      <ban:SecurityHeader>
+                         <AuthToken>${token}</AuthToken>
+                      </ban:SecurityHeader>
+                   </soapenv:Header>
+                   <soapenv:Body>
+                      <ban:GetAccountDetails>
+                         <accountNumber>${acc}</accountNumber>
+                      </ban:GetAccountDetails>
+                   </soapenv:Body>
+                </soapenv:Envelope>`.trim();
+
+            resDiv.innerText = "Bağlantı kuruluyor...";
+
+            try {
+                const response = await fetch('http://localhost:8001/bank', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/xml', 'SOAPAction': 'GetAccountDetails' },
+                    body: soapRequest
+                });
+
+                const xml = await response.text();
+                resDiv.innerText = xml;
+            } catch (err) {
+                resDiv.innerText = "Kritik Hata: " + err.message;
+            }
+        }
+    </script>
+</body>
+
+</html>

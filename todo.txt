@@ -1,0 +1,22 @@
+🟢 Kolay
+[x] Validation Middleware — req.body kontrolünü controller'dan ayır, ayrı bir middleware'de yap
+[x] CORS Middleware — Farklı domainlerden (örneğin frontend'den) istek kabul etmeyi öğren
+[x] Rate Limiter — Bir IP'den dakikada en fazla X istek kabul et (brute-force koruması)
+
+🟡 Orta
+[x] Auth Middleware — Basit bir API key veya JWT token kontrolü yap (header'dan oku, doğrula)
+[x] Param Validation Middleware — express-validator veya kendi yazdığın bir middleware ile gelen verinin tipini/formatını kontrol et
+[x] Response Wrapper — Tüm yanıtları { success: true, data: ... } gibi standart bir formata sar
+[ ] Products Validation — Products için express-validator kurallarını ekle
+[ ] Swagger API Docs — /api-docs üzerinden tüm API'yi dökümante et ve test panelini aç
+[ ] Global Constants — Hata mesajlarını ve response mesajlarını merkezi bir yerden yönet
+[ ] JWT Entegrasyonu — API Key yerine kullanıcı bazlı, süreli token sistemine geçiş yap
+
+🔴 İleri
+Database bağlantısı — 
+
+products.json
+ yerine gerçek bir veritabanı (SQLite veya MongoDB) kullan
+[x] Service katmanı — Controller → Service → Database şeklinde bir katman daha ekle
+Environment Variables — PORT, DB_URL gibi değerleri .env dosyasından oku (dotenv)
+[x] Error Handling — Hata mesajlarını daha detaylı ve kullanıcı dostu bir şekilde göster
